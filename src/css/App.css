@@ -1,28 +1,187 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+
+
+/*  Basic Layout Structure */
+
+body {
+  background-color: rgb(245,245,245)
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
+.container {
+  display: block;
+  width: 1024px;
+  height: 100vh;
+  margin: 0px auto;
+  font-size: 0px;
+  background-color: white;
+}
+
+.order-queue {
+  display: inline-block;
+  width: 400px;
+  height: 100vh;
+  overflow: scroll;
+}
+
+.order-item {
+  display: inline-block;
+  width: 624px;
+  height: 100vh;
+  vertical-align: top;
+  overflow: scroll;
+}
+
+
+
+/* Card Queue */
+
+
+.card {
+  width: 100%;
+  height: 120px;
+  border-bottom: 1px solid rgb(225,225,225);
+  border-right: 1px solid rgb(225,225,225);
+  border-left: 1px solid rgb(225,225,225);
   padding: 20px;
-  color: white;
 }
 
-.App-title {
-  font-size: 1.5em;
+.card.fulfilled{
+  background-color: rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(0,0,0,0.15);
+  border-right: 1px solid rgba(0,0,0,0.15);
+  border-left: 1px solid rgba(0,0,0,0.15);
 }
 
-.App-intro {
-  font-size: large;
+
+.card h1.card-order-items {
+  font-weight: 600;
+  font-size: 16px;
+  margin: 14px 0px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.card .card-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card h2.card-customer-name {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.card .card-pickup-time-block  {
+  font-size: 14px;
+}
+
+.card .card-pickup-time  {
+  font-size: 14px;
+  padding: 0px 10px;
+}
+
+.card h3.card-order-id {
+  font-weight: 300;
+  font-size: 10px;
+  margin: 8px 0px 0px 0px;
+  color: rgba(0,0,0,.4)
+}
+
+/* Order Item */
+
+
+
+.order-header {
+  width: 95%;
+  height: 120px;
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 30px;
+  border-bottom: 1px solid rgb(225,225,225);
+  align-items: center;
+  margin: 0px auto;
+}
+
+.order-header h1.order-id {
+  font-size: 20px;
+  font-weight: 300;
+  color: rgba(0,0,0,.6)
+}
+.order-header h1.order-customer-name {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.order-header .order-pickup-time-block {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.order-header .order-pickup-time {
+  padding: 0px 0px 0px 20px;
+}
+
+
+.order-card {
+  width: 95%;
+  /* min-height: 240px; */
+  justify-content: space-between;
+  padding: 30px 30px;
+  border-bottom: 1px solid rgb(245,245,245);
+  align-items: top;
+  margin: 0px auto;
+}
+
+.order-card h1 {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.order-card ul {
+  list-style-type: none;
+}
+
+
+.order-card ul li {
+  font-size: 16px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(0,0,0,0.7);
+  margin-bottom: 6px;
+}
+
+
+
+.order-footer {
+  width: 95%;
+  height: 120px;
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 30px;
+  align-items: center;
+  margin: 50px auto;
+}
+
+.order-footer .order-button {
+  margin: auto;
+  font-size: 16px;
+  /* background-color: red; */
+  border-radius: 10px;
+  border: 1px solid rgb(225,225,225);
+  text-align: center;
+  padding: 12px 25px;
+  cursor: pointer;
+}
+
+.order-footer .order-button:hover {
+  background-color: rgba(0,0,0,0.03)
 }
