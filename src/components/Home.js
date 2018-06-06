@@ -86,7 +86,7 @@ class Home extends Component {
           {this.state.orders
             .sort((a,b)=> a.orderStatus === 'done' ? false : true)
             .map(el=>(
-            <div className={`card ${el.orderStatus === 'done' ? 'fulfilled' : null}`}>
+            <div className={`left-card ${el.orderStatus === 'done' ? 'fulfilled' : null}`}>
             <h1 className='card-order-items'>{el.orderItems[0].count} x {el.orderItems[0].itemName}, {el.orderItems[0].size}</h1>
             <div className='card-content'>
               <h2 className='card-customer-name'>
@@ -166,16 +166,16 @@ class Home extends Component {
             </div>
             <h3 className='card-order-id'>ORDER ID #123ASSAD27</h3>
           </div> */}
-          <div className='card'></div>
-          <div className='card'></div>
-          <div className='card'></div>
-          <div className='card'></div>
-          <div className='card'></div>
-          <div className='card'></div>
-          <div className='card'></div>
-          <div className='card'></div>
-          <div className='card'></div>
-          <div className='card'></div>
+          <div className='left-card'></div>
+          <div className='left-card'></div>
+          <div className='left-card'></div>
+          <div className='left-card'></div>
+          <div className='left-card'></div>
+          <div className='left-card'></div>
+          <div className='left-card'></div>
+          <div className='left-card'></div>
+          <div className='left-card'></div>
+          <div className='left-card'></div>
 
 
         </section>
