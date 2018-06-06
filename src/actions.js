@@ -1,22 +1,24 @@
 import axios from 'axios'
 import { request } from './helpers'
 
-export const DO_ACTION = 'DO_ACTION'
+export const CHANGE_ACTIVE_PAGE = 'CHANGE_ACTIVE_PAGE'
 
+
+const pages = [
+  {id: 0, name: 'home'},
+  {id: 1, name: 'login'}
+]
 
 
 
 const API = `${process.env.REACT_APP_BACKEND}`
 
 
-export const doAction = () => (
+export const changeActivePage = pageId => (
   dispatch => {
-    axios.get(`${API}/api/`)
-    .then((response) => {
       dispatch({
-        type: DO_ACTION,
-        payload: response.data.data
+        type: CHANGE_ACTIVE_PAGE,
+        payload: pages.find(el => el.id === pageId)
       })
-    })
   }
 )

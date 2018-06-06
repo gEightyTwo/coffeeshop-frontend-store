@@ -10,6 +10,7 @@
     "popmotion-pose": "^2.0.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
+    "react-materialize": "^2.2.1",
     "react-moment": "^0.7.0",
     "react-pose": "^2.0.0",
     "react-redux": "^5.0.7",

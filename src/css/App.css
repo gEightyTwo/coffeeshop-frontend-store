@@ -185,3 +185,33 @@ body {
 .order-footer .order-button:hover {
   background-color: rgba(0,0,0,0.03)
 }
+
+
+
+/* Login  */
+
+section.register-section {
+  width: auto;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 300px;
+}
+
+img.registerLogo {
+  margin: auto;
+  width: 200px;
+  border-radius: 100px;
+}
+
+form.register-form {
+  padding: 50px 20px 100px 20px;
+}
+
+.login-button {
+  display: block;
+  width: 100%;
+  margin: 30px auto;
+}
