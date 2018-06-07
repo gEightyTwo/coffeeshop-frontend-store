@@ -63,7 +63,7 @@ const Home = props => {
 
                 </div>
               </div>
-              <h3 className='card-order-id'>ORDER ID {order.order_shortid}</h3>
+              <h3 className='card-order-id'>ORDER ID #{order.order_shortid ? order.order_shortid.toUpperCase() : null}</h3>
           </div>
         ))}
           {/* <div className={`left-card`}>
@@ -94,7 +94,7 @@ const Home = props => {
 
           <header className='order-header'>
             <div>
-              <h1 className='order-id'>ORDER #{activeOrder.order_shortid}</h1>
+              <h1 className='order-id'>ORDER #{activeOrder.order_shortid ?activeOrder.order_shortid.toUpperCase() : null }</h1>
               <h1 className='order-customer-name'>{activeOrder.first_name} {activeOrder.last_name}</h1>
             </div>
             <div className='order-pickup-time-block'>
