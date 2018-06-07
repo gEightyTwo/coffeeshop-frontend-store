@@ -1,7 +1,6 @@
 import React from 'react';
 import '../css/App.css';
 import {SideNav, SideNavItem, Button, Collapsible, CollapsibleItem, Collection, CollectionItem} from 'react-materialize'
-import io from 'socket.io-client';
 import { bindActionCreators } from 'redux'
 import {connect} from 'react-redux'
 
@@ -9,11 +8,6 @@ import {connect} from 'react-redux'
 import {changeActivePage} from '../actions'
 // import { withAuthentication } from '../helpers'
 import { request, AuthenticationService, withAuthentication } from '../helpers'
-
-
-//
-// const token = localStorage.getItem('token') || 12345
-// const socket = io.connect(`http://localhost:3000?token=${token}`, {reconnect: true})
 
 
 const handleSignIn = (event, props) => {
