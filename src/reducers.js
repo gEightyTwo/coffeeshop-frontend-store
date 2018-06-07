@@ -6,7 +6,7 @@ import {
   SET_ACTIVE_ORDER
 } from './actions'
 
-const INITIAL_PAGE = {id: 1, pageName: 'home'}
+const INITIAL_PAGE = {id: 0, pageName: 'home'}
 const INITIAL_ORDERS = [
   // {
   //   orderId: '#AS6ASF876',

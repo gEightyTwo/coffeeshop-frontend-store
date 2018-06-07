@@ -7,7 +7,13 @@ import {getOrders,setActiveOrder, updateOrderStatus} from '../actions'
 import { request, AuthenticationService, withAuthentication } from '../helpers'
 
 
-// import io from 'socket.io-client';
+import io from 'socket.io-client';
+
+const token = localStorage.getItem('token') || 12345
+const socket = io.connect(`http://localhost:3000?token=${token}`, {reconnect: true})
+
+
+
 
 const handleGetOrders = props => {
   const ownerId = props.authState ? props.authState.id : null
@@ -24,6 +30,12 @@ const handleCompleteOrder = (props, is_fulfilled) => {
 }
 
 const Home = props => {
+
+    socket.on('chat message response', function(msg){
+        console.log('hiiiiii')
+        handleGetOrders(props)
+    })
+
     const {activeOrder} = props
     if (!props.orders.length) handleGetOrders(props)
     if (props.orders.length && !props.activeOrder.id) handleOrderSelection(props, props.orders[0])
