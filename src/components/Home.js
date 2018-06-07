@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import {connect} from 'react-redux'
 import Moment from 'react-moment'
 import 'moment-timezone'
-import {getOrders,setActiveOrder} from '../actions'
+import {getOrders,setActiveOrder, updateOrderStatus} from '../actions'
 import { request, AuthenticationService, withAuthentication } from '../helpers'
 
 
@@ -19,6 +19,10 @@ const handleOrderSelection = (props, order) => {
   props.setActiveOrder(order)
 }
 
+const handleCompleteOrder = (props, is_fulfilled) => {
+  props.updateOrderStatus(props.authState.id,props.activeOrder.id, is_fulfilled, false)
+}
+
 const Home = props => {
     const {activeOrder} = props
     if (!props.orders.length) handleGetOrders(props)
@@ -29,6 +33,7 @@ const Home = props => {
           {/* {console.log(props.orders)} */}
           {props.orders
             .filter(order => order.orderItems.length)
+            .sort((a,b) => !a.is_fulfilled)
             .map(order=>(
             <div className={`left-card ${order.is_fulfilled ? 'fulfilled' : null}`} key={order.id} onClick={()=>handleOrderSelection(props, order)}>
               <h1 className='card-order-items'>{
@@ -128,7 +133,11 @@ const Home = props => {
 
 
           <footer className='order-footer'>
-            <div className='order-button' onClick={()=>handleGetOrders(props)}>Complete Order</div>
+            {props.activeOrder.is_fulfilled
+              ? <div className='order-button' onClick={()=>handleCompleteOrder(props, false)}>Redo Order</div>
+              : <div className='order-button' onClick={()=>handleCompleteOrder(props, true)}>Complete Order</div>
+              }
+            {/* <div className='order-button' onClick={()=>handleCompleteOrder(props)}>Complete Order</div> */}
           </footer>
 
         </section>
@@ -139,7 +148,7 @@ const Home = props => {
 
 
 
-const mapDispatchToProps = dispatch => bindActionCreators({getOrders,setActiveOrder}, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({getOrders,setActiveOrder, updateOrderStatus}, dispatch)
 const mapStateToProps = ({orders, activeOrder}) => ({orders, activeOrder})
 export default connect(mapStateToProps,mapDispatchToProps)(withAuthentication(Home))
 

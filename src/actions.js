@@ -6,6 +6,7 @@ export const GET_ORDERS = 'GET_ORDERS'
 export const SET_ACTIVE_ORDER = 'SET_ACTIVE_ORDER'
 
 
+
 const pages = [
   {id: 0, name: 'home'},
   {id: 1, name: 'login'}
@@ -44,6 +45,16 @@ export const setActiveOrder = order => (
     dispatch({
       type: SET_ACTIVE_ORDER,
       payload: order
+    })
+  }
+)
+
+
+export const updateOrderStatus = (userId, orderId, is_fulfilled, is_canceled) => (
+  dispatch => {
+    request(`/api/shop/${userId}/orders/${orderId}`, 'patch', {is_fulfilled, is_canceled})
+    .then(() => {
+      dispatch(getOrders())
     })
   }
 )
