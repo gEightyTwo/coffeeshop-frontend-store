@@ -29,8 +29,10 @@ export const changeActivePage = pageId => (
 
 export const getOrders = userId => (
   dispatch => {
+    console.log(userId);
     request(`/api/shop/${userId}/orders`)
     .then(orders => {
+      console.log('this is dispatching...')
       dispatch({
         type: GET_ORDERS,
         payload: orders
