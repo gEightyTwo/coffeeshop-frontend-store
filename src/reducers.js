@@ -1,12 +1,50 @@
 import { combineReducers } from 'redux'
 
 import {
-  // GET_ALL_ITEMS,
+  GET_ORDERS,
   CHANGE_ACTIVE_PAGE
 } from './actions'
 
-const INITIAL_PAGE = {id: 1, pageName: 'home'}
-const INITIAL_ALL_ITEMS = []
+const INITIAL_PAGE = {id: 0, pageName: 'home'}
+const INITIAL_ORDERS = [
+  {
+    orderId: '#AS6ASF876',
+    orderUserName: 'Dan Dog',
+    orderStatus: '5 min',
+    orderTargetTime: new Date(),
+    orderItems: [
+      {
+        itemName: 'Latte',
+        count: 2,
+        size: '16 oz',
+        milk: 'Skim Milk',
+        expresso: 'Double Shot'
+      },
+      {
+        itemName: 'Americano',
+        count: 1,
+        size: '12 oz',
+        milk: '2% Milk',
+        expresso: 'Double Shot'
+      }
+    ]
+  },
+  {
+    orderId: '#AS6ASF876',
+    orderUserName: 'Dan Dog',
+    orderStatus: 'done',
+    orderTargetTime: new Date(),
+    orderItems: [
+      {
+        itemName: 'Americano',
+        count: 1,
+        size: '12 oz',
+        milk: '2% Milk',
+        expresso: 'Double Shot'
+      }
+    ]
+  }
+]
 
 
 
@@ -18,12 +56,14 @@ const activePage = (state = INITIAL_PAGE, action) => {
 }
 
 
-const allItems = (state = INITIAL_ALL_ITEMS, action) => {
+const orders = (state = INITIAL_ORDERS, action) => {
   switch(action.type){
-    // case GET_ALL_ITEMS: return action.payload
+    case GET_ORDERS: {
+      console.log(action.payload.data.data)
+      return action.payload.data.data}
     default: return state
   }
 }
 
 
-export default combineReducers({ activePage, allItems })
+export default combineReducers({ activePage, orders })

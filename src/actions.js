@@ -2,6 +2,7 @@ import axios from 'axios'
 import { request } from './helpers'
 
 export const CHANGE_ACTIVE_PAGE = 'CHANGE_ACTIVE_PAGE'
+export const GET_ORDERS = 'GET_ORDERS'
 
 
 const pages = [
@@ -20,5 +21,18 @@ export const changeActivePage = pageId => (
         type: CHANGE_ACTIVE_PAGE,
         payload: pages.find(el => el.id === pageId)
       })
+  }
+)
+
+
+export const getOrders = userId => (
+  dispatch => {
+    request(`/api/shop/${userId}/orders`)
+    .then(orders => {
+      dispatch({
+        type: GET_ORDERS,
+        payload: orders
+      })
+    })
   }
 )
