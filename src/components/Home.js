@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import { bindActionCreators } from 'redux'
 import {connect} from 'react-redux'
-
-import {getOrders} from '../actions'
+import Moment from 'react-moment'
+import 'moment-timezone'
+import {getOrders,setActiveOrder} from '../actions'
 import { request, AuthenticationService, withAuthentication } from '../helpers'
 
 
@@ -13,39 +14,73 @@ const handleGetOrders = props => {
   props.getOrders(ownerId)
 }
 
-const Home = props => {
+const handleOrderSelection = (props, order) => {
+  console.log(order);
+  props.setActiveOrder(order)
+}
 
+const Home = props => {
+    const {activeOrder} = props
+    if (!props.orders.length) handleGetOrders(props)
+    if (props.orders.length && !props.activeOrder.id) handleOrderSelection(props, props.orders[0])
     return (
       <div className='container'>
         <section className='order-queue'>
+          {/* {console.log(props.orders)} */}
           {props.orders
-            .sort((a,b)=> a.orderStatus === 'done' ? false : true)
-            .map(el=>(
-            <div className={`left-card ${el.orderStatus === 'done' ? 'fulfilled' : null}`}>
-            <h1 className='card-order-items'>{el.orderItems[0].count} x {el.orderItems[0].itemName}, {el.orderItems[0].size}</h1>
+            .filter(order => order.orderItems.length)
+            .map(order=>(
+            <div className={`left-card ${order.is_fulfilled ? 'fulfilled' : null}`} key={order.id} onClick={()=>handleOrderSelection(props, order)}>
+              <h1 className='card-order-items'>{
+                order.orderItems.map(item=>item.item_name+ ' ' + item.product_size).join(', ').length > 40
+                ? order.orderItems.map(item=>item.item_name+ ' ' + item.product_size).join(', ').slice(0,40)+'...'
+                : order.orderItems.map(item=>item.item_name+ ' ' + item.product_size).join(', ')
+              }</h1>
+              <div className='card-content'>
+                <h2 className='card-customer-name'>
+                  {order.first_name} {order.last_name}
+                </h2>
+                <div className='card-pickup-time-block'>
+                  {order.is_fulfilled
+                    ?
+                      <div className='card-pickup-time-block'>
+                        <i className="far fa-check-circle"></i>
+                        <span className='card-pickup-time'>done</span>
+                      </div>
+                    :
+                      <div className='card-pickup-time-block'>
+                        <i className="far fa-clock"></i>
+                        <span className='card-pickup-time'>{<Moment to={order.pickup_time} >{new Date}</Moment>}</span>
+                      </div>
+                 }
+
+
+
+                </div>
+              </div>
+              <h3 className='card-order-id'>ORDER ID {order.order_shortid}</h3>
+          </div>
+        ))}
+          {/* <div className={`left-card`}>
+            <h1 className='card-order-items'>{'sdsds'}</h1>
             <div className='card-content'>
               <h2 className='card-customer-name'>
-                {el.orderUserName}
+                Dan Dog
               </h2>
               <div className='card-pickup-time-block'>
                 <i className="far fa-check-circle"></i>
-                <span className='card-pickup-time'>{el.orderStatus}</span>
+                <span className='card-pickup-time'>{'active'}</span>
               </div>
             </div>
-            <h3 className='card-order-id'>ORDER ID {el.orderId}</h3>
-          </div>
-        ))}
+            <h3 className='card-order-id'>ORDER ID {'shortid'}</h3>
+        </div> */}
 
-          <div className='left-card'></div>
-          <div className='left-card'></div>
-          <div className='left-card'></div>
-          <div className='left-card'></div>
-          <div className='left-card'></div>
-          <div className='left-card'></div>
-          <div className='left-card'></div>
-          <div className='left-card'></div>
-          <div className='left-card'></div>
-          <div className='left-card'></div>
+
+
+        <div className='left-card'></div>
+        <div className='left-card'></div>
+        <div className='left-card'></div>
+
 
 
         </section>
@@ -54,17 +89,27 @@ const Home = props => {
 
           <header className='order-header'>
             <div>
-              <h1 className='order-id'>ORDER #AS6ASF876</h1>
-              <h1 className='order-customer-name'>Mark Pavlovski</h1>
+              <h1 className='order-id'>ORDER #{activeOrder.order_shortid}</h1>
+              <h1 className='order-customer-name'>{activeOrder.first_name} {activeOrder.last_name}</h1>
             </div>
             <div className='order-pickup-time-block'>
               <i className="far fa-clock"></i>
-              <span className='order-pickup-time'>5 min</span>
+              <span className='order-pickup-time'>{<Moment to={activeOrder.pickup_time} >{new Date}</Moment>}</span>
             </div>
           </header>
 
-
-          <div className='order-card'>
+          {activeOrder.orderItems ? activeOrder.orderItems.map(item=>
+            <div className='order-card' key={item.id}>
+              <h1>{item.item_name+ ' - ' + item.product_size}</h1>
+              <ul>
+                <li>{item.espresso_shots + item.extra_espresso_shots} SHOTS</li>
+                <li>{item.product_milk}</li>
+              </ul>
+            </div>
+          )
+          : null
+        }
+          {/* <div className='order-card'>
             <h1>1 x Americano - 12 oz</h1>
             <ul>
               <li>2 Shots</li>
@@ -78,7 +123,7 @@ const Home = props => {
               <li>Extra Shot</li>
               <li>Almond Milk</li>
             </ul>
-          </div>
+          </div> */}
 
 
 
@@ -94,8 +139,8 @@ const Home = props => {
 
 
 
-const mapDispatchToProps = dispatch => bindActionCreators({getOrders}, dispatch)
-const mapStateToProps = ({orders}) => ({orders})
+const mapDispatchToProps = dispatch => bindActionCreators({getOrders,setActiveOrder}, dispatch)
+const mapStateToProps = ({orders, activeOrder}) => ({orders, activeOrder})
 export default connect(mapStateToProps,mapDispatchToProps)(withAuthentication(Home))
 
 

@@ -3,6 +3,7 @@ import { request } from './helpers'
 
 export const CHANGE_ACTIVE_PAGE = 'CHANGE_ACTIVE_PAGE'
 export const GET_ORDERS = 'GET_ORDERS'
+export const SET_ACTIVE_ORDER = 'SET_ACTIVE_ORDER'
 
 
 const pages = [
@@ -33,6 +34,16 @@ export const getOrders = userId => (
         type: GET_ORDERS,
         payload: orders
       })
+    })
+  }
+)
+
+
+export const setActiveOrder = order => (
+  dispatch => {
+    dispatch({
+      type: SET_ACTIVE_ORDER,
+      payload: order
     })
   }
 )

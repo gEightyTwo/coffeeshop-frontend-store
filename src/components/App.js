@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 
 import Home from './Home'
 import Login from './Login'
+import {getOrders,setActiveOrder} from '../actions'
 import { request, AuthenticationService } from '../helpers'
 
 // const token = localStorage.getItem('token') || 12345
@@ -21,6 +22,7 @@ const App = (props) => {
   request('/auth/token')
       .then(response => {
         AuthenticationService.setAuthState(response.data)
+
       })
 
   return (
