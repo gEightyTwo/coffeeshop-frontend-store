@@ -1,6 +1,6 @@
-# Coffeeshop (Frontend - Store Side)
+# CoffeeShop (Frontend-store_facing)
 
-Description will go here
+CoffeeShop is a coffee ordering web application.  It allows users to create a profile, log in, and order custom coffee drinks.  The app utilizes the Google API location codes to find the nearest coffee shops and walking distance to the shop.  Users can craft their drink order and set the time they want to pick up their drinks for a delay up to 30 minutes.  Coffee shop owners can receive incoming orders, sorted by pickup time, and fulfill orders.
 
 ## Getting Started
 
@@ -12,24 +12,19 @@ What things you need to install the software and how to install them
 
 ```shell
 * fork and clone this repository
+* run npm install
 ```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+Make sure the database and backend are created first!
 
-to utilize the postgress db
-
-Install dependent node modules:
+Start the react development server:
 
 ```shell
-* run npm install
+* npm start
 ```
-Start the development server:
 
-```shell
-npm start
-```
 
 ## Deployment
 
@@ -42,9 +37,9 @@ This project has been deployed on Heroku at the address:
 * [React](https://reactjs.org/) - Frontend library
 * [Redux](https://redux.js.org/) - State container
 * [postgreSQL](https://www.postgresql.org/) - database
-* [Redux](https://redux.js.org/) - State container
 * [Axios](https://github.com/axios/axios) - Promise based HTTP client for the browser and node.js
 * [Node](https://nodejs.org/en/) - Package ecosystem
+* [Sockets.io] (https://nodejs.org/en/) - Sockets system
 
 ## Contributing
 
