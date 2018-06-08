@@ -41,21 +41,21 @@ componentDidMount(){
   const props = this.props
   const {activeOrder} = props
   if (!props.orders.length) handleGetOrders(props)
-  // if (props.orders.length && !props.activeOrder.id) handleOrderSelection(props, props.orders[0])
-  // socket.on('chat message response', (msg) => {
-  //     console.log('hiiiiii')
-  //     handleGetOrders(props)
-  //     this.forceUpdate()
-  // })
+  if (props.orders.length && !props.activeOrder.id) handleOrderSelection(props, props.orders[0])
+  socket.on('chat message response', (msg) => {
+      console.log('hiiiiii')
+      handleGetOrders(props)
+      this.forceUpdate()
+  })
 }
 
 render(){
   const props = this.props
-  socket.on('chat message response', (msg) => {
-      // console.log('hiiiiii')
-      handleGetOrders(props)
-      this.forceUpdate()
-  })
+  // socket.on('chat message response', (msg) => {
+  //     // console.log('hiiiiii')
+  //     handleGetOrders(props)
+  //     this.forceUpdate()
+  // })
 
     const {activeOrder} = props
     // if (!props.orders.length) handleGetOrders(props)
@@ -119,6 +119,7 @@ render(){
 
 
 
+        <div className='left-card'></div>
         <div className='left-card'></div>
         <div className='left-card'></div>
         <div className='left-card'></div>
