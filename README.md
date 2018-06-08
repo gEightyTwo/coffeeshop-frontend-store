@@ -6,6 +6,10 @@ CoffeeShop is a coffee ordering web application.  It allows users to create a pr
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
+### The Backend
+
+the backend can be found at: https://github.com/gEightyTwo/coffeeshop-backend
+
 ### Prerequisites
 
 What things you need to install the software and how to install them
@@ -28,7 +32,9 @@ Start the react development server:
 
 ## Deployment
 
-This project has been deployed on Heroku at the address:
+This project has been deployed on Heroku at the address: 
+* https://coffeeshop-customer.herokuapp.com
+* https://coffeeshop-store.herokuapp.com
 
 ## Built With
 
@@ -39,7 +45,8 @@ This project has been deployed on Heroku at the address:
 * [postgreSQL](https://www.postgresql.org/) - database
 * [Axios](https://github.com/axios/axios) - Promise based HTTP client for the browser and node.js
 * [Node](https://nodejs.org/en/) - Package ecosystem
-* [Sockets.io] (https://nodejs.org/en/) - Sockets system
+* [Sockets](https://sockets.io) - Sockets system
+
 
 ## Contributing
 
