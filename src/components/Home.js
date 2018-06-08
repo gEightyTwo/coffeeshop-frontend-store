@@ -42,19 +42,20 @@ componentDidMount(){
   const {activeOrder} = props
   if (!props.orders.length) handleGetOrders(props)
   // if (props.orders.length && !props.activeOrder.id) handleOrderSelection(props, props.orders[0])
-  socket.on('chat message response', (msg) => {
-      console.log('hiiiiii')
-      handleGetOrders(props)
-      this.forceUpdate()
-  })
+  // socket.on('chat message response', (msg) => {
+  //     console.log('hiiiiii')
+  //     handleGetOrders(props)
+  //     this.forceUpdate()
+  // })
 }
 
 render(){
   const props = this.props
-    // socket.on('chat message response', function(msg){
-    //     console.log('hiiiiii')
-    //     handleGetOrders(props)
-    // })
+  socket.on('chat message response', (msg) => {
+      // console.log('hiiiiii')
+      handleGetOrders(props)
+      this.forceUpdate()
+  })
 
     const {activeOrder} = props
     // if (!props.orders.length) handleGetOrders(props)
@@ -65,7 +66,11 @@ render(){
           {/* {console.log(props.orders)} */}
           {props.orders
             .filter(order => order.orderItems.length)
-            .sort((a,b) => !a.is_fulfilled)
+            .sort((a,b) => {
+              if (a.is_fulfilled && !b.is_fulfilled) return -1
+              if (b.is_fulfilled && !a.is_fulfilled) return 1
+              return Date.parse(a.pickup_time)-Date.parse(b.pickup_time)
+            })
             .map(order=>(
             <div className={`left-card ${order.is_fulfilled ? 'fulfilled' : null}`} key={order.id} onClick={()=>handleOrderSelection(props, order)}>
               <h1 className='card-order-items'>{
